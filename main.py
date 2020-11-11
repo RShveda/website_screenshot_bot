@@ -8,17 +8,19 @@ from url_helpers import format_url, validate_url
 import os
 
 
+# getting telegram TOKEN from configs
 try:
-    # you may create config file with TG_TOKEN as your token
+    # you may create config file with TG_TOKEN variable as your token
     import config
     TOKEN = config.TG_TOKEN
-    # or simply add your telegram token here:
-    # TOKEN = "your token"
+# also you may add the token to your system variables
 except ModuleNotFoundError:
     TOKEN = os.environ.get("TG_TOKEN")
 except AttributeError:
     TOKEN = os.environ.get("TG_TOKEN")
 
+# or simply add your telegram token here:
+# TOKEN = "your token"
 
 # Enable logging
 logging.basicConfig(level=logging.DEBUG,
@@ -58,7 +60,9 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 
 def image(update: Update, context: CallbackContext) -> None:
-    """Echo the user message."""
+    """
+    This function check if URL is valid, make a screenshot of the webpage, and send it to user.
+    """
     url = update.message.text
     url = format_url(url)
     if validate_url(url):
@@ -72,8 +76,6 @@ def image(update: Update, context: CallbackContext) -> None:
 def main():
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
-    # Make sure to set use_context=True to use the new context based callbacks
-    # Post version 12 this will no longer be necessary
     updater = Updater(TOKEN, use_context=True)
 
     # Get the dispatcher to register handlers
