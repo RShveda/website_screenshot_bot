@@ -32,6 +32,7 @@ def make_image(web_url):
     DRIVER = os.environ.get('CHROMEDRIVER_PATH', 'chromedriver')
     driver_options = Options()
     driver_options.add_argument("--headless")
+    driver_options.add_argument('--no-sandbox')
     driver = webdriver.Chrome(DRIVER, options=driver_options)
     driver.get(web_url)
     height = driver.execute_script(
