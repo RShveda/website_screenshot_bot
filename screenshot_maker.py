@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 from PIL import Image
 import uuid
+import os
 
 DEFAULT_WIDTH = 1920
 DEFAULT_HEIGHT = 1080
@@ -18,7 +19,7 @@ def resize_image(img_name: str):
 
 
 def make_image(web_url):
-    DRIVER = 'chromedriver'
+    DRIVER = os.environ.get('CHROMEDRIVER_PATH', 'chromedriver')
     driver_options = Options()
     driver_options.add_argument("--headless")
     driver = webdriver.Chrome(DRIVER, options=driver_options)
