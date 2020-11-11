@@ -9,9 +9,11 @@ import os
 
 
 try:
+    # you may create config file with TG_TOKEN as your token
     import config
     TOKEN = config.TG_TOKEN
-    print("Token imported")
+    # or simply add your telegram token here:
+    # TOKEN = "your token"
 except ModuleNotFoundError:
     TOKEN = os.environ.get("TG_TOKEN")
 except AttributeError:
